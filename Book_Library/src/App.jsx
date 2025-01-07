@@ -1,3 +1,9 @@
+import Search from "./components/Search";
+
 export default function App() {
-  return <div></div>;
+  return (
+    <div>
+      <Search />
+    </div>
+  );
 }
