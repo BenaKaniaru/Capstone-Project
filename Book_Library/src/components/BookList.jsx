@@ -6,7 +6,7 @@ export default function BookList({ books, loading }) {
         {/*Customized heading based on loading status and obtained results*/}
         {loading && <h1>Loading your search results...</h1>}
         {!loading && books.length === 0 && (
-          <h1 className="text-red">No results found!</h1>
+          <h1 className="text-red-500">No results found!</h1>
         )}
         {!loading && books.length > 0 && (
           <h1 className="text-orange-500">Here are your search results</h1>

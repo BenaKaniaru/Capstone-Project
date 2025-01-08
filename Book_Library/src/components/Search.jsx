@@ -15,6 +15,7 @@ export default function Search({ setBooks, setLoading }) {
 
     setError(null);
     setLoading(true);
+    setBooks([]); //clear previous search results
 
     try {
       const response = await fetch(`${url}=${searchInput}`);
