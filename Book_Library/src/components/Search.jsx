@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-export default function Search() {
+export default function Search({ setBooks, setLoading }) {
   const [searchInput, setSearchInput] = useState("");
-  const [books, setBooks] = useState([]);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
   const url = "https://openlibrary.org/search.json?title";
 
   //function for handling form submission
@@ -54,7 +52,7 @@ export default function Search() {
       {/*Display error message, if any */}
 
       {error && (
-        <div className="border w-64 bg-white text-red-500 rounded-md m-4 px-4">
+        <div className="border w-64 bg-white text-red-500 rounded-md m-4 px-4 text-center">
           {error}
         </div>
       )}

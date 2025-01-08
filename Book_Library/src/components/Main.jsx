@@ -1,10 +1,14 @@
 import bgImage from "../Images/imagess.jpeg";
+import BookList from "./BookList";
 import Search from "./Search";
+import React, { useState } from "react";
 export default function Main() {
+  const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(false);
   return (
     <main className="w-screen">
       <div
-        className="bg-contain bg-center py-20 px-14 flex flex-col items-center gap-3 w-full"
+        className="bg-cover bg-center py-20 px-14 flex flex-col items-center gap-3 w-full"
         style={{
           backgroundImage: `url(${bgImage})`,
           backgroundColor: "black", //fallback color incase bg-image fails to load
@@ -18,8 +22,9 @@ export default function Main() {
           Knowledge is the key that unlocks the doors to endless
           possibilities—every day is a chance to learn and grow.
         </p>
-        <Search />
+        <Search setBooks={setBooks} setLoading={setLoading} />
       </div>
+      <BookList books={books} loading={loading} />
     </main>
   );
 }
