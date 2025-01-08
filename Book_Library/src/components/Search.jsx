@@ -52,9 +52,12 @@ export default function Search() {
       </button>
 
       {/*Display error message, if any */}
-      <div className="border w-64 bg-white text-red-500 rounded-md m-4 px-4">
-        {error}
-      </div>
+
+      {error && (
+        <div className="border w-64 bg-white text-red-500 rounded-md m-4 px-4">
+          {error}
+        </div>
+      )}
     </form>
   );
 }

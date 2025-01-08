@@ -1,11 +1,9 @@
-import Search from "./components/Search";
-import Nav from "./components/Nav";
+import Homepage from "./Pages/Homepage";
 
 export default function App() {
   return (
     <div>
-      <Nav />
-      <Search />
+      <Homepage />
     </div>
   );
 }

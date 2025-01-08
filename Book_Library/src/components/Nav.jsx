@@ -1,6 +1,6 @@
 export default function Nav() {
   return (
-    <div className=" flex flex-row bg-gray-300 drop-shadow-md p-1 items-center fixed top-0 left-0 right-0">
+    <header className=" flex flex-row bg-gray-300 drop-shadow-md p-1 items-center fixed top-0 left-0 right-0">
       <div className="w-72 py-4 ml-10">
         <span className="text-orange-500 font-black text-2xl">NerdHub</span>
       </div>
@@ -15,6 +15,6 @@ export default function Nav() {
           Log In/Sign In
         </span>
       </div>
-    </div>
+    </header>
   );
 }
