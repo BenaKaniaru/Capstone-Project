@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom";
 import BookItem from "./BookItem";
-export default function BookList({ books, loading }) {
+export default function BookList({ books, loading, bookId, setBookId }) {
   return (
     <div className=" flex flex-col gap-4 px-10 pt-2 bg-gray-100 ">
       <div className="text-center text-xl font-bold">
@@ -14,7 +15,9 @@ export default function BookList({ books, loading }) {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
         {books.slice(0, 50).map((book) => (
-          <BookItem key={book.key} book={book} />
+          <Link key={book.key} to={`/BookDetails${book.key}`}>
+            <BookItem key={book.key} book={book} setBookId={setBookId} />
+          </Link>
         ))}
       </div>
     </div>

@@ -2,8 +2,7 @@ import bgImage from "../Images/imagess.jpeg";
 import BookList from "./BookList";
 import Search from "./Search";
 import React, { useState } from "react";
-export default function Main() {
-  const [books, setBooks] = useState([]);
+export default function Main({ books, setBooks, bookId, setBookId }) {
   const [loading, setLoading] = useState(false);
   return (
     <main className="w-screen">
@@ -24,7 +23,12 @@ export default function Main() {
         </p>
         <Search setBooks={setBooks} setLoading={setLoading} />
       </div>
-      <BookList books={books} loading={loading} />
+      <BookList
+        books={books}
+        loading={loading}
+        bookId={bookId}
+        setBookId={setBookId}
+      />
     </main>
   );
 }

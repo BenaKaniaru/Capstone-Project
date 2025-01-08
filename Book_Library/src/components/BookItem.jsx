@@ -1,8 +1,12 @@
 import coverImg from "../Images/download.png";
-export default function BookItem({ book }) {
+export default function BookItem({ book, bookId, setBookId }) {
   return (
     <div key={book.key}>
-      <div className="shadow-xl rounded-lg bg-white m-1 h-96">
+      <div
+        className="shadow-xl rounded-lg bg-white m-1 h-96 hover:border-2 hover:border-orange-500"
+        onClick={() => setBookId(book.key)}
+      >
+        {" "}
         <img
           className="w-full p-2 h-64"
           src={
