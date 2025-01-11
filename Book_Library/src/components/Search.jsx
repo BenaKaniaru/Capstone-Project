@@ -31,32 +31,35 @@ export default function Search({ setBooks, setLoading }) {
     setLoading(false);
   }
   return (
-    <form onSubmit={handleSearch} className="block items-center">
-      {/*Search Input field */}
-      <input
-        name="searchInput"
-        value={searchInput}
-        onChange={(e) => {
-          setSearchInput(e.target.value);
-        }}
-        type="text"
-        className="border px-3 py-1 text-black rounded-l-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-      />
-      {/*form submission button */}
-      <button
-        type="submit"
-        className="border p-1 rounded-r-lg text-white w-20 bg-orange-500 hover:bg-orange-200"
-      >
-        Search
-      </button>
+    <div>
+      <form onSubmit={handleSearch} className="flex flex-row items-center">
+        {/*Search Input field */}
+        <input
+          className="flex-1"
+          name="searchInput"
+          value={searchInput}
+          onChange={(e) => {
+            setSearchInput(e.target.value);
+          }}
+          placeholder="search for books by author,title, or keywords"
+          type="text"
+          className="border px-3 py-1 text-black rounded-l-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+        />
+        {/*form submission button */}
+        <button
+          type="submit"
+          className="border p-1 rounded-r-lg text-white w-20 bg-orange-500 hover:bg-orange-200"
+        >
+          Search
+        </button>
+      </form>
 
       {/*Display error message, if any */}
-
       {error && (
-        <div className="border w-64 bg-white text-red-500 rounded-md m-4 px-4 text-center">
+        <div className="border w-64 bg-white text-red-500 rounded-md mt-8 px-4 text-center">
           {error}
         </div>
       )}
-    </form>
+    </div>
   );
 }

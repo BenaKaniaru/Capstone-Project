@@ -1,4 +1,5 @@
 import Nav from "../components/Nav";
+import coverImg from "../Images/download.png";
 import { useNavigate } from "react-router-dom";
 export default function BookDetails({ books, bookId }) {
   const bookItem = books.find((book) => book.key === bookId);
@@ -32,14 +33,16 @@ export default function BookDetails({ books, bookId }) {
           />
           <div className="flex-1 grid gap-1">
             <h2 className="text-md md:text-lg lg:text-xl font-medium">
-              {bookItem.title}
+              {bookItem.title ? bookItem.title : "Not Available"}
             </h2>
             <p>
               <span className="text-sm md:text-md lg:text-lg font-semibold mr-2">
                 Author(s):
               </span>
               <span className="text-sm lg:text-md ">
-                {bookItem.author_name.join(", ")}
+                {bookItem.author_name
+                  ? bookItem.author_name.join(", ")
+                  : "Not Available"}
               </span>
             </p>
             <p>
@@ -47,7 +50,9 @@ export default function BookDetails({ books, bookId }) {
                 Publisher(s):{" "}
               </span>
               <span className="text-sm lg:text-md">
-                {bookItem.publisher.join(", ")}
+                {bookItem.publisher
+                  ? bookItem.publisher.join(", ")
+                  : "Not Available"}
               </span>
             </p>
             <p>
@@ -55,16 +60,17 @@ export default function BookDetails({ books, bookId }) {
                 Publication Date:{" "}
               </span>
               <span className="text-sm lg:text-md">
-                {bookItem.publish_date.join(", ")}
+                {bookItem.publish_date
+                  ? bookItem.publish_date.join(", ")
+                  : "Not Available"}
               </span>
             </p>
             <p>
               <span className="text-sm md:text-md lg:text-lg font-semibold mr-2">
                 ISBN:
               </span>
-
               <span className="text-sm lg:text-md">
-                {bookItem.isbn.join(", ")}
+                {bookItem.isbn ? bookItem.isbn.join(", ") : "Not Available"}
               </span>
             </p>
             <p>
@@ -72,16 +78,19 @@ export default function BookDetails({ books, bookId }) {
                 Number of Pages:
               </span>
               <span className="text-sm lg:text-md">
-                {bookItem.number_of_pages_median}
+                {bookItem.number_of_pages_median
+                  ? bookItem.number_of_pages_median
+                  : "Not Available"}
               </span>
             </p>
             <p>
               <span className="text-sm md:text-md lg:text-lg font-semibold mr-2">
                 Subject:
               </span>
-
               <span className="text-sm lg:text-md">
-                {bookItem.subject.join(", ")}
+                {bookItem.subject
+                  ? bookItem.subject.join(", ")
+                  : "Not Available"}
               </span>
             </p>
           </div>

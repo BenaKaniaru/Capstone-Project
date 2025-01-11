@@ -3,12 +3,12 @@ export default function BookItem({ book, bookId, setBookId }) {
   return (
     <div key={book.key}>
       <div
-        className="shadow-xl rounded-lg bg-white m-1 h-96 hover:border-2 hover:border-orange-500"
+        className="shadow-sm rounded-lg bg-gray-200 m-1 h-96 hover:border-2 hover:border-orange-500"
         onClick={() => setBookId(book.key)}
       >
         {" "}
         <img
-          className="w-full p-2 h-64"
+          className="w-full p-4 md:p-2 h-64 "
           src={
             book.cover_i
               ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`

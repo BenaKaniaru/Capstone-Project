@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import BookItem from "./BookItem";
 export default function BookList({ books, loading, bookId, setBookId }) {
   return (
-    <div className=" flex flex-col gap-4 px-10 pt-2 bg-gray-100 ">
+    <div className=" flex flex-col gap-4 px-10 pt-2 bg-white ">
       <div className="text-center text-xl font-bold">
         {/*Customized heading based on loading status and obtained results*/}
         {loading && <h1>Loading your search results...</h1>}
@@ -13,7 +13,7 @@ export default function BookList({ books, loading, bookId, setBookId }) {
           <h1 className="text-orange-500">Here are your search results</h1>
         )}
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2">
         {books.slice(0, 50).map((book) => (
           <Link key={book.key} to={`/BookDetails${book.key}`}>
             <BookItem key={book.key} book={book} setBookId={setBookId} />
