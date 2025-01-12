@@ -11,9 +11,12 @@ export default function Nav() {
           Home
         </Link>
 
-        <span className="hover:cursor-pointer hover:text-blue-500">
+        <Link
+          to="/ReadingList"
+          className="hover:cursor-pointer hover:text-blue-500"
+        >
           Reading List
-        </span>
+        </Link>
         <span className="hover:cursor-pointer hover:text-blue-500">About</span>
         <span className="hover:cursor-pointer hover:text-blue-500">
           Log In/Sign In

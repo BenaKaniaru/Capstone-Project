@@ -1,16 +1,50 @@
 import Nav from "../components/Nav";
+import { useEffect, useState } from "react";
 import coverImg from "../Images/download.png";
 import { useNavigate } from "react-router-dom";
-export default function BookDetails({ books, bookId }) {
-  const bookItem = books.find((book) => book.key === bookId);
+export default function BookDetails({
+  books,
+  bookId,
+  readingList,
+  setReadingList,
+}) {
+  const [bookItem, setBookItem] = useState("");
+  const [bookAddedMessage, setBookAddedMessage] = useState("");
+
+  // useEffect to set the bookItem state based on the bookId
+  useEffect(() => {
+    const pickedBook = books.find((book) => book.key === bookId);
+    setBookItem(pickedBook);
+  }, [books, bookId]);
+
   const navigate = useNavigate();
+  const bookAdded = readingList.some((book) => book.key === bookItem.key);
+
+  const addToReadingList = () => {
+    if (!bookItem) return;
+
+    if (bookAdded) {
+      alert("Book already added to Reading List");
+      return;
+    } else {
+      setReadingList([...readingList, bookItem]);
+
+      setBookAddedMessage("Book Added!");
+
+      setTimeout(() => {
+        setBookAddedMessage("");
+      }, 1000);
+    }
+  };
 
   return (
     <div>
       <Nav />
       <div className="mt-20">
         {!bookItem && (
-          <h1 className="font-bold text-center text-red-500">Book no Found!</h1>
+          <h1 className="font-bold text-center text-red-500">
+            Book not Found!
+          </h1>
         )}
         <p className="text-black mx-10 my-1">
           <span
@@ -93,6 +127,19 @@ export default function BookDetails({ books, bookId }) {
                   : "Not Available"}
               </span>
             </p>
+            <div className="text-center">
+              <p className="text-green-500 italic mb-4">{bookAddedMessage}</p>
+              <button
+                className={`w-44 items-center text-white rounded-lg p-2 mt-1 drop-shadow ${
+                  bookAdded
+                    ? "bg-gray-500 cursor-not-allowed"
+                    : "bg-orange-500 hover:bg-orange-400 animate-bounce"
+                }`}
+                onClick={addToReadingList}
+              >
+                {bookAdded ? "Added to Reading List" : "Add to Reading List"}
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ export default function BookItem({ book, bookId, setBookId }) {
       >
         {" "}
         <img
-          className="w-full p-4 md:p-2 h-64 "
+          className="w-full p-4 sm:px-24 md:p-2 h-64 "
           src={
             book.cover_i
               ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
