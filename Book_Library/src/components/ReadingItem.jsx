@@ -27,7 +27,7 @@ export default function ({ readingList, setReadingList }) {
             />
             <div>
               <p>
-                <span className="font-bold mr-1 mb-2">
+                <span className="font-bold text-lg mr-1 mb-2">
                   {book.title ? book.title : "Book Title Not Available"}
                 </span>
                 ({book.publish_date ? book.publish_date[0] : "No publish date"})
@@ -41,7 +41,7 @@ export default function ({ readingList, setReadingList }) {
             </div>
 
             <button
-              className="bg-orange-500 p-1 text-white hover:p-2 transition-all duration-300 ease-in-out"
+              className="bg-orange-500 p-1 text-white hover:p-2 transition-all duration-300 ease-in-out px-2"
               onClick={() => deleteReadingItem(book)}
             >
               Delete

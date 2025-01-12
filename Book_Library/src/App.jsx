@@ -3,10 +3,15 @@ import Homepage from "./Pages/Homepage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import BookDetails from "./Pages/BookDetails";
 import ReadingList from "./Pages/ReadingList";
+import UserAuth from "./Pages/UserAuth";
+import LogIn from "./components/LogIn";
+import SignIn from "./components/SignIn";
 export default function App() {
   const [bookId, setBookId] = useState("");
   const [books, setBooks] = useState([]);
   const [readingList, setReadingList] = useState([]);
+  const initialValues = { username: "", email: "", password: "", confirm: "" };
+  const [formValues, setFormValues] = useState(initialValues);
 
   return (
     <BrowserRouter>
@@ -35,7 +40,6 @@ export default function App() {
             />
           }
         />
-
         <Route
           path="/ReadingList/"
           element={
@@ -43,6 +47,24 @@ export default function App() {
               readingList={readingList}
               setReadingList={setReadingList}
             />
+          }
+        />
+        <Route
+          path="/UserAuth"
+          element={
+            <UserAuth formValues={formValues} setFormValues={setFormValues} />
+          }
+        />
+        <Route
+          path="/LogIn"
+          element={
+            <LogIn formValues={formValues} setFormValues={setFormValues} />
+          }
+        />
+        <Route
+          path="/SignIn"
+          element={
+            <SignIn formValues={formValues} setFormValues={setFormValues} />
           }
         />
       </Routes>

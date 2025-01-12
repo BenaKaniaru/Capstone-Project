@@ -6,7 +6,7 @@ export default function Nav() {
         <span className="text-orange-500 font-black text-2xl">NerdHub</span>
       </div>
       <div className="flex-1"></div>
-      <div className="w-96 flex justify-between mx-8 text-white text-lg">
+      <div className="w-96 md:flex justify-between text-white text-lg hidden mx-10">
         <Link to="/" className="hover:cursor-pointer hover:text-blue-500">
           Home
         </Link>
@@ -18,9 +18,17 @@ export default function Nav() {
           Reading List
         </Link>
         <span className="hover:cursor-pointer hover:text-blue-500">About</span>
-        <span className="hover:cursor-pointer hover:text-blue-500">
-          Log In/Sign In
-        </span>
+        <Link
+          to="/UserAuth"
+          className="hover:cursor-pointer hover:text-blue-500"
+        >
+          Log In/Sign In{" "}
+        </Link>
+
+        {/*humburger menu icon*/}
+        <div className="flex md:hidden hover:cursor-pointer text-white mx-4">
+          <i className="fa fa-bars"></i>
+        </div>
       </div>
     </header>
   );

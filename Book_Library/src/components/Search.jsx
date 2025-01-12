@@ -2,7 +2,22 @@ import React, { useState } from "react";
 export default function Search({ setBooks, setLoading }) {
   const [searchInput, setSearchInput] = useState("");
   const [error, setError] = useState("");
-  const url = "https://openlibrary.org/search.json?title";
+  const baseUrl = {
+    title: "https://openlibrary.org/search.json?title",
+    author: "https://openlibrary.org/search.json?author",
+    isbn: "https://openlibrary.org/search.json?isbn",
+  };
+
+  //function for determining the search input
+  const getSearchType = (input) => {
+    const isbnRegex = /^\d{10}(\d{3})?$/; // Matches 10 or 13 digit ISBN
+    if (isbnRegex.test(input)) return "isbn";
+    if (input.split(" ").length > 1) return "title";
+
+    {
+      /*if (input.split(" ").length > 1) return "title";*/
+    } //haven't figured out how to differentiate between title and author search but I am working on it
+  };
 
   //function for handling form submission
   //function ensures controlled API calls
@@ -16,6 +31,9 @@ export default function Search({ setBooks, setLoading }) {
     setError(null);
     setLoading(true);
     setBooks([]); //clear previous search results
+
+    const searchType = getSearchType(searchInput);
+    const url = `${baseUrl[searchType]}=${searchInput}`;
 
     try {
       const response = await fetch(`${url}=${searchInput}`);
