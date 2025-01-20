@@ -16,7 +16,6 @@ export default function BookDetails({
   useEffect(() => {
     const pickedBook = books.find((book) => book.key === bookId);
     setBookItem(pickedBook);
-    console.log(pickedBook);
   }, [books, bookId]);
 
   const navigate = useNavigate();
@@ -30,6 +29,8 @@ export default function BookDetails({
       return;
     } else {
       setReadingList([...readingList, bookItem]);
+
+      //localStorage.setItem("readingList", JSON.stringify(updatedList));
 
       setBookAddedMessage("Book Added!");
 

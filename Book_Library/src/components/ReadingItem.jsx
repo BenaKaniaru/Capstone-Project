@@ -1,13 +1,13 @@
+import { useState } from "react";
 import coverImg from "../Images/download.png";
-export default function ({ readingList, setReadingList }) {
+
+export default function ReadingItem({ readingList, setReadingList }) {
   //function to delete a book from the reading list
   function deleteReadingItem(book) {
-    setReadingList(
-      readingList.filter((readingItem) => {
-        book.id !== readingItem.id;
-      })
-    );
+    setReadingList(readingList.filter((bookItem) => bookItem.key !== book.key));
+    console.log(book.key);
   }
+
   return (
     <ul>
       {readingList.length > 0 ? (
