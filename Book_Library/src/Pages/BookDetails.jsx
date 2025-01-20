@@ -1,4 +1,5 @@
 import Nav from "../components/Nav";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import coverImg from "../Images/download.png";
 import { useNavigate } from "react-router-dom";
@@ -130,16 +131,27 @@ export default function BookDetails({
             </p>
             <div className="text-center">
               <p className="text-green-500 italic mb-4">{bookAddedMessage}</p>
-              <button
-                className={`w-44 items-center text-white rounded-lg p-2 mt-1 drop-shadow ${
-                  bookAdded
-                    ? "bg-gray-500 cursor-not-allowed"
-                    : "bg-orange-500 hover:bg-orange-400 animate-bounce"
-                }`}
-                onClick={addToReadingList}
-              >
-                {bookAdded ? "Added to Reading List" : "Add to Reading List"}
-              </button>
+              <div className="flex flex-col items-center gap-2">
+                <button
+                  className={`w-44 items-center text-white rounded-lg p-2 mt-1 drop-shadow ${
+                    bookAdded
+                      ? "bg-gray-500 cursor-not-allowed"
+                      : "bg-orange-500 hover:bg-orange-400 animate-bounce"
+                  }`}
+                  onClick={addToReadingList}
+                >
+                  {bookAdded ? "Added to Reading List" : "Add to Reading List"}
+                </button>
+
+                {bookAdded && (
+                  <Link
+                    to="/ReadingList"
+                    className="text-orange-500 font-medium italic underline hover:cursor-pointer"
+                  >
+                    Open Reading List
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         </div>
