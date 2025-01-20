@@ -4,7 +4,7 @@ export default function ({ readingList, setReadingList }) {
   function deleteReadingItem(book) {
     setReadingList(
       readingList.filter((readingItem) => {
-        return book.id !== readingItem.id;
+        book.id !== readingItem.id;
       })
     );
   }
@@ -14,7 +14,7 @@ export default function ({ readingList, setReadingList }) {
         readingList.map((book) => (
           <li
             key={book.key}
-            className="flex flex-row gap-8 md:gap-14 lg:gap-20 items-center hover:border-l-4 pl-2 justify-center hover:border-orange-500"
+            className="flex flex-row gap-8 md:gap-14 lg:gap-20 items-center hover:border-l-4 pl-2 justify-center hover:border-orange-500 mx-2"
           >
             <img
               className=" w-20 h-30 m-2"
@@ -25,7 +25,7 @@ export default function ({ readingList, setReadingList }) {
               }
               alt="Book cover"
             />
-            <div>
+            <div className="flex-1">
               <p>
                 <span className="font-bold text-lg mr-1 mb-2">
                   {book.title ? book.title : "Book Title Not Available"}

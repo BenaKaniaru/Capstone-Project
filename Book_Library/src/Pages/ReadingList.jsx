@@ -1,10 +1,18 @@
+import { useNavigate } from "react-router-dom";
 import ReadingItem from "../components/ReadingItem";
 import Nav from "../components/Nav";
 export default function ReadingList({ readingList, setReadingList }) {
+  const navigate = useNavigate();
   return (
     <div>
       <Nav />
       <div className="mt-20">
+        <span
+          className="ml-10 italic underline text-md hover:cursor-pointer"
+          onClick={() => navigate(-1)}
+        >
+          Back
+        </span>
         {readingList.length === 0 && (
           <h1 className="font-bold text-center text-xl text-orange-500 mb-2">
             No Books in Reading List
