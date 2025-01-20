@@ -5,7 +5,7 @@ export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <header className=" flex flex-row bg-gray-500 drop-shadow-md p-1 items-center fixed top-0 left-0 right-0">
-      <div className="w-72 py-4 ml-10">
+      <div className="w-72 py-4 ml-4 md:ml-10">
         <span className="text-orange-500 font-black text-2xl">NerdHub</span>
       </div>
       <div className="flex-1"></div>
@@ -30,7 +30,7 @@ export default function Nav() {
       </nav>
       {/*humburger menu icon*/}
       <button
-        className="flex flex-col md:hidden hover:cursor-pointer text-white mr-10 gap-1 z-5"
+        className="flex flex-col md:hidden hover:cursor-pointer text-white mr-4 md:mr-10 gap-1 z-5"
         onClick={() => {
           setMenuOpen(!menuOpen);
         }}

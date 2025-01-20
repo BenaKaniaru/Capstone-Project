@@ -8,7 +8,7 @@ export default function ReadingList({ readingList, setReadingList }) {
       <Nav />
       <div className="mt-20">
         <span
-          className="ml-10 italic underline text-md hover:cursor-pointer"
+          className="ml-2 md:ml-10 italic underline text-md hover:cursor-pointer"
           onClick={() => navigate(-1)}
         >
           Back
@@ -23,7 +23,7 @@ export default function ReadingList({ readingList, setReadingList }) {
             Reading List
           </h1>
         )}
-        <ul className="flex flex-col gap-4 box-shadow-lg bg-gray-300 mx-11 md:mx-28 lg:mx-36 p-4 rounded-xl">
+        <ul className="flex flex-col gap-4 box-shadow-lg bg-gray-300 mx-2 md:mx-28 lg:mx-36 p-4 rounded-xl">
           <ReadingItem
             readingList={readingList}
             setReadingList={setReadingList}
