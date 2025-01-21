@@ -5,7 +5,6 @@ export default function ReadingItem({ readingList, setReadingList }) {
   //function to delete a book from the reading list
   function deleteReadingItem(book) {
     setReadingList(readingList.filter((bookItem) => bookItem.key !== book.key));
-    console.log(book.key);
   }
 
   return (

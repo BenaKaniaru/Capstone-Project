@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Homepage from "./Pages/Homepage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import BookDetails from "./Pages/BookDetails";
@@ -9,9 +9,16 @@ import SignIn from "./components/SignIn";
 export default function App() {
   const [bookId, setBookId] = useState("");
   const [books, setBooks] = useState([]);
-  const [readingList, setReadingList] = useState([]);
   const initialValues = { username: "", email: "", password: "", confirm: "" };
   const [formValues, setFormValues] = useState(initialValues);
+  const [readingList, setReadingList] = useState(() => {
+    const savedList = localStorage.getItem("readings");
+    return savedList ? JSON.parse(savedList) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("readings", JSON.stringify(readingList));
+  }, [readingList]);
 
   return (
     <BrowserRouter>
