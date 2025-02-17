@@ -1,4 +1,4 @@
-import bgImage from "../Images/imagess.jpeg";
+import bgImage from "../Images/banner.jpeg";
 import BookList from "./BookList";
 import Search from "./Search";
 import React, { useState } from "react";
@@ -7,7 +7,7 @@ export default function Main({ books, setBooks, bookId, setBookId }) {
   return (
     <main className="w-screen">
       <div
-        className="bg-cover bg-center py-20 px-14 mt-16 flex flex-col items-center gap-3 w-full"
+        className="bg-cover bg-center py-20 px-14 mt-16 flex flex-col items-center gap-3 w-full "
         style={{
           backgroundImage: `url(${bgImage})`,
           backgroundColor: "black", //fallback color incase bg-image fails to load
@@ -17,11 +17,11 @@ export default function Main({ books, setBooks, bookId, setBookId }) {
           Your <span className="font-bold text-orange-500">Gateway </span> to
           Endless <span className="font-bold text-orange-500">Knowledge </span>.
         </h1>
-        <p className="text-white italic font-light mb-8">
+        <p className="text-white italic font-bold mb-8">
           Knowledge is the key that unlocks the doors to endless
           possibilities—every day is a chance to learn and grow.
         </p>
-        <Search setBooks={setBooks} setLoading={setLoading} />
+        <Search books={books} setBooks={setBooks} setLoading={setLoading} />
       </div>
       <BookList
         books={books}

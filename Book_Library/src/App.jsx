@@ -35,13 +35,12 @@ export default function App() {
           }
         />
         <Route
-          path={`/BookDetails${bookId}`}
+          path={"/BookDetails/:bookId"}
           element={
             <BookDetails
               books={books}
+              bookId ={bookId}
               setBooks={setBooks}
-              bookId={bookId}
-              setBookId={setBookId}
               readingList={readingList}
               setReadingList={setReadingList}
             />

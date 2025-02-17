@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-export default function Search({ setBooks, setLoading }) {
+export default function Search({ setBooks, books, setLoading }) {
   const [searchInput, setSearchInput] = useState("");
   const [error, setError] = useState("");
-  const baseUrl = "https://openlibrary.org/search.json?title";
+  const baseUrl = "https://www.googleapis.com/books/v1/volumes?q"; //base url for the API
+  const apiKey = "AIzaSyDRppaMO63Az_zhhND7zglCho42UcLyZgI";
 
   //function for determining the search input
   /*const getSearchType = (input) => {
@@ -32,16 +33,18 @@ export default function Search({ setBooks, setLoading }) {
     //const url = `${baseUrl[searchType]}=${searchInput}`;
 
     try {
-      const response = await fetch(`${baseUrl}=${searchInput}`);
+      const response = await fetch(
+        `${baseUrl}=${searchInput}&API_KEY=${apiKey}`
+      );
       if (!response.ok) {
         throw new Error("Failed to fetch data. Please try again!");
       }
       const data = await response.json();
-      setBooks(data.docs);
+      setBooks(data.items);
     } catch (error) {
       setError(error.message);
     }
-
+    console.log(books);
     setLoading(false);
   }
   return (

@@ -1,4 +1,5 @@
 import Nav from "../components/Nav";
+import {useParams} from "react-router-dom"
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import coverImg from "../Images/download.png";
@@ -9,17 +10,34 @@ export default function BookDetails({
   readingList,
   setReadingList,
 }) {
-  const [bookItem, setBookItem] = useState("");
+  //const {bookId} = useParams();
+  const [bookItem, setBookItem] = useState();
   const [bookAddedMessage, setBookAddedMessage] = useState("");
+  const [loadingError, setLoadingError] = useState(false)
+  console.log("bookId:", bookId)
+  console.log("books:", books);
+  
 
   // useEffect to set the bookItem state based on the bookId
-  useEffect(() => {
-    const pickedBook = books.find((book) => book.key === bookId);
-    setBookItem(pickedBook);
-  }, [books, bookId]);
+  useEffect(() =>{ 
+    setBookItem(books.find((book) => book.id === bookId));
+
+    const timer = setTimeout(() => {
+      if (!bookItem) {
+        setLoadingError(true);
+      }
+    }, 5000);
+
+    return () => clearTimeout(timer);
+
+  }, [books, bookId, bookItem]);
+  console.log("bookItem:", bookItem)
 
   const navigate = useNavigate();
-  const bookAdded = readingList.some((book) => book.key === bookItem.key);
+
+    const bookAdded = bookItem ? readingList.some((book) => book.id === bookItem.id) : false;
+
+ 
 
   const addToReadingList = () => {
     if (!bookItem) return;
@@ -42,121 +60,142 @@ export default function BookDetails({
 
   return (
     <div>
+      
       <Nav />
+      
       <div className="mt-20">
-        {!bookItem && (
-          <h1 className="font-bold text-center text-red-500">
-            Book not Found!
+        {!bookItem ? loadingError ? (
+           
+            <h1 className="font-bold text-center text-red-500">
+            Error loading book details
           </h1>
-        )}
-        <p className="text-black mx-10 my-1">
-          <span
-            className="underline hover:cursor-pointer"
-            onClick={() => navigate(-1)}
-          >
-            Back
-          </span>
-          <span className="italic font-light ml-2 ">{bookItem.title}</span>
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 shadow-lg mx-10 bg-gray-200 rounded-xl p-4">
-          <img
-            className="p-2 w-52 h-64 md:w-64 md:h-72 lg:w-72 lg:h-96 m-auto"
-            src={
-              bookItem.cover_i
-                ? `https://covers.openlibrary.org/b/id/${bookItem.cover_i}-M.jpg`
-                : coverImg
-            }
-            alt="Book Cover"
-          />
-          <div className="flex-1 grid gap-1">
-            <h2 className="text-md md:text-lg lg:text-xl font-medium">
-              {bookItem.title ? bookItem.title : "Not Available"}
-            </h2>
-            <p>
-              <span className="text-sm md:text-md lg:text-lg font-semibold mr-2">
-                Author(s):
-              </span>
-              <span className="text-sm lg:text-md ">
-                {bookItem.author_name
-                  ? bookItem.author_name.join(", ")
-                  : "Not Available"}
-              </span>
-            </p>
-            <p>
-              <span className="text-sm md:text-md lg:text-lg font-semibold mr-2">
-                Publisher(s):{" "}
-              </span>
-              <span className="text-sm lg:text-md">
-                {bookItem.publisher
-                  ? bookItem.publisher.join(", ")
-                  : "Not Available"}
-              </span>
-            </p>
-            <p>
-              <span className="text-sm md:text-md lg:text-lg font-semibold mr-2">
-                Publication Date:{" "}
-              </span>
-              <span className="text-sm lg:text-md">
-                {bookItem.publish_date
-                  ? bookItem.publish_date.join(", ")
-                  : "Not Available"}
-              </span>
-            </p>
-            <p>
-              <span className="text-sm md:text-md lg:text-lg font-semibold mr-2">
-                ISBN:
-              </span>
-              <span className="text-sm lg:text-md">
-                {bookItem.isbn ? bookItem.isbn.join(", ") : "Not Available"}
-              </span>
-            </p>
-            <p>
-              <span className="text-sm md:text-md lg:text-lg font-semibold mr-2">
-                Number of Pages:
-              </span>
-              <span className="text-sm lg:text-md">
-                {bookItem.number_of_pages_median
-                  ? bookItem.number_of_pages_median
-                  : "Not Available"}
-              </span>
-            </p>
-            <p>
-              <span className="text-sm md:text-md lg:text-lg font-semibold mr-2">
-                Subject:
-              </span>
-              <span className="text-sm lg:text-md">
-                {bookItem.subject
-                  ? bookItem.subject.join(", ")
-                  : "Not Available"}
-              </span>
-            </p>
-            <div className="text-center">
-              <p className="text-green-500 italic mb-4">{bookAddedMessage}</p>
-              <div className="flex flex-col items-center gap-2">
-                <button
-                  className={`w-44 items-center text-white rounded-lg p-2 mt-1 drop-shadow ${
-                    bookAdded
-                      ? "bg-gray-500 cursor-not-allowed"
-                      : "bg-orange-500 hover:bg-orange-400 animate-bounce"
-                  }`}
-                  onClick={addToReadingList}
-                >
-                  {bookAdded ? "Added to Reading List" : "Add to Reading List"}
-                </button>
+          
+        ) : ( <h1 className="font-bold text-center text-red-500">
+            Loading...
+          </h1>) : (
+        <>
+          <p className="text-black mx-10 my-1">
+            <span
+              className="underline hover:cursor-pointer"
+              onClick={() => navigate(-1)}
+            >
+              Back
+            </span>
+            <span className="italic font-light ml-2 ">{bookItem.volumeInfo.title || "Not Available"}</span>
+          </p>
+      
+          <div className="flex flex-col sm:flex-row gap-4 shadow-lg mx-10 bg-gray-200 rounded-xl p-4">
+            <img
+              className="p-2 w-52 h-64 md:w-64 md:h-72 lg:w-72 lg:h-96 m-auto"
+              src={
+                bookItem.volumeInfo.imageLinks
+                  ? bookItem.volumeInfo.imageLinks.thumbnail
+                  : coverImg
+              }
+              alt="Book Cover"
+            />
 
-                {bookAdded && (
-                  <Link
-                    to="/ReadingList"
-                    className="text-orange-500 font-medium italic underline hover:cursor-pointer"
+            <div className="flex-1 grid gap-1">
+              <h2 className="text-md md:text-lg lg:text-xl font-medium">
+                {bookItem.volumeInfo.title ? bookItem.volumeInfo.title : "Not Available"}
+              </h2>
+              <p>
+                <span className="text-sm md:text-md lg:text-lg font-semibold mr-2">
+                  Author(s):
+                </span>
+                <span className="text-sm lg:text-md ">
+                  {bookItem.volumeInfo.authors
+                    ? bookItem.volumeInfo.authors.join(", ")
+                    : "Not Available"}
+                </span>
+              </p>
+              <p>
+                <span className="text-sm md:text-md lg:text-lg font-semibold mr-2">
+                  Description:
+                </span>
+                <span className="text-sm lg:text-md ">
+                  {bookItem.volumeInfo.description
+                    ? bookItem.volumeInfo.description
+                    : "Not Available"}
+                </span>
+              </p>
+              <p>
+                <span className="text-sm md:text-md lg:text-lg font-semibold mr-2">
+                  Publisher(s):{" "}
+                </span>
+                <span className="text-sm lg:text-md">
+                  {bookItem.volumeInfo.publisher
+                    ? bookItem.volumeInfo.publisher
+                    : "Not Available"}
+                </span>
+              </p>
+              <p>
+                <span className="text-sm md:text-md lg:text-lg font-semibold mr-2">
+                  Publication Date:{" "}
+                </span>
+                <span className="text-sm lg:text-md">
+                  {bookItem.volumeInfo.publishedDate
+                    ? bookItem.volumeInfo.publishedDate
+                    : "Not Available"}
+                </span>
+              </p>
+              <p>
+                <span className="text-sm md:text-md lg:text-lg font-semibold mr-2">
+                  ISBN:
+                </span>
+                <span className="text-sm lg:text-md">
+                  {bookItem.volumeInfo.industryIdentifiers? bookItem?.volumeInfo?.industryIdentifiers?.find(id => id.type === "ISBN_13")?.identifier : "Not Available"}
+                </span>
+              </p>
+              <p>
+                <span className="text-sm md:text-md lg:text-lg font-semibold mr-2">
+                  Number of Pages:
+                </span>
+                <span className="text-sm lg:text-md">
+                  {bookItem.volumeInfo.pageCount
+                    ? bookItem.volumeInfo.pageCount
+                    : "Not Available"}
+                </span>
+              </p>
+              <p>
+                <span className="text-sm md:text-md lg:text-lg font-semibold mr-2">
+                  Subject:
+                </span>
+                <span className="text-sm lg:text-md">
+                  {bookItem.volumeInfo.categories
+                    ? bookItem.volumeInfo.categories.join(", ")
+                    : "Not Available"}
+                </span>
+              </p>
+              <div className="text-center">
+                <p className="text-green-500 italic mb-4">{bookAddedMessage}</p>
+                <div className="flex flex-col items-center gap-2">
+                  <button
+                    className={`w-44 items-center text-white rounded-lg p-2 mt-1 drop-shadow ${
+                      bookAdded
+                        ? "bg-gray-500 cursor-not-allowed"
+                        : "bg-orange-500 hover:bg-orange-400 animate-bounce"
+                    }`}
+                    onClick={addToReadingList}
+                    disabled={!bookItem}
                   >
-                    Open Reading List
-                  </Link>
-                )}
+                    {bookAdded ? "Added to Reading List" : "Add to Reading List"}
+                  </button>
+
+                  {bookAdded && (
+                    <Link
+                      to="/ReadingList"
+                      className="text-orange-500 font-medium italic underline hover:cursor-pointer"
+                    >
+                      Open Reading List
+                    </Link>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </>)}
       </div>
-    </div>
+  </div>
   );
 }

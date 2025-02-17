@@ -15,8 +15,8 @@ export default function BookList({ books, loading, bookId, setBookId }) {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2">
         {books.slice(0, 50).map((book) => (
-          <Link key={book.key} to={`/BookDetails${book.key}`}>
-            <BookItem key={book.key} book={book} setBookId={setBookId} />
+          <Link key={book.id} to={`/BookDetails/${book.id}`}>
+            <BookItem key={book.id} book={book} setBookId={setBookId} />
           </Link>
         ))}
       </div>
