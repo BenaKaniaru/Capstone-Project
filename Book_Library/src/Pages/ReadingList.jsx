@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import ReadingItem from "../components/ReadingItem";
 import Nav from "../components/Nav";
+import Footer from "../components/Footer";
 export default function ReadingList({ readingList, setReadingList }) {
   const navigate = useNavigate();
   return (
@@ -30,6 +31,7 @@ export default function ReadingList({ readingList, setReadingList }) {
           />
         </ul>
       </div>
+      <Footer />
     </div>
   );
 }

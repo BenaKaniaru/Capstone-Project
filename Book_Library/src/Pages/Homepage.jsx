@@ -1,9 +1,10 @@
 import Nav from "../components/Nav";
 import Main from "../components/Main";
+import Footer from "../components/Footer";
 
 export default function Homepage({ books, setBooks, bookId, setBookId }) {
   return (
-    <div className="flex">
+    <div className="">
       <Nav />
       <Main
         books={books}
@@ -11,6 +12,7 @@ export default function Homepage({ books, setBooks, bookId, setBookId }) {
         bookId={bookId}
         setBookId={setBookId}
       />
+      <Footer />
     </div>
   );
 }

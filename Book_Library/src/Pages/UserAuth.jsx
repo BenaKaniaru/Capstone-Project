@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import SignIn from "../components/SignIn";
 import Nav from "../components/Nav";
+import Footer from "../components/Footer";
 
 export default function UserAuth({ formValues, setFormValues }) {
   const [userData, setUserData] = useState(null);
@@ -29,6 +30,7 @@ export default function UserAuth({ formValues, setFormValues }) {
           />
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
